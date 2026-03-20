@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Masterclasses | 123-WEARZ Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/luxury.css">
+    <style>
+        /* Additional Workshop-Specific Styles */
+        .workshop-hero {
+            height: 70vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workshop-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1600') center/cover;
+            opacity: 0.3;
+            animation: slowZoom 20s ease-in-out infinite;
+        }
+        
+        @keyframes slowZoom {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .workshop-filters {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+        
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #d4af37;
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .workshop-grid {
+            padding: 5rem 0;
+            background: #0a0a0a;
+        }
+        
+        .workshop-card-luxury {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+        
+        .workshop-card-luxury:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .workshop-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            z-index: 2;
+            font-weight: 500;
+        }
+        
+        .workshop-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .workshop-card-luxury:hover .workshop-image {
+            transform: scale(1.05);
+        }
+        
+        .workshop-content {
+            padding: 1.5rem;
+        }
+        
+        .workshop-category {
+            font-size: 0.7rem;
+            color: #d4af37;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .workshop-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .workshop-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .workshop-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .workshop-description {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .workshop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .workshop-price {
+            font-size: 1.2rem;
+            color: #d4af37;
+            font-weight: 500;
+        }
+        
+        .workshop-price small {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-workshop {
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-workshop:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+        
+        .workshop-featured {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0) 100%);
+            border-left: 2px solid #d4af37;
+        }
+        
+        .upcoming-badge {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .masterclass-series {
+            background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .series-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .series-card:hover {
+            border-color: #d4af37;
+            transform: translateX(10px);
+        }
+        
+        .series-number {
+            font-size: 3rem;
+            color: #d4af37;
+            opacity: 0.3;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .series-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .series-description {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: center;
+            }
+            
+            .series-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav class="nav-premium">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-icon">✦</div>
+                <div class="logo-text">
+                    <span class="logo-main">123-WEARZ</span>
+                    <span class="logo-sub">BESPOKE TAILORING</span>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Atelier</a>
+                <a href="shop.html" class="nav-link">Collections</a>
+                <a href="custom-order.html" class="nav-link">Bespoke</a>
+                <a href="workshops.html" class="nav-link active">Masterclass</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" id="cartBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Workshop Hero -->
+    <section class="workshop-hero">
+        <div class="hero-content">
+            <div class="hero-badge">THE ATELIER</div>
+            <h1 class="hero-title">
+                <span class="title-line">Master the Art</span>
+                <span class="title-line">of Tailoring</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Exclusive workshops led by master artisans. Learn the secrets<br>
+                of bespoke tailoring in an intimate, hands-on environment.
+            </p>
+        </div>
+        <div class="hero-scroll">
+            <span>Discover Workshops</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Workshop Filters -->
+    <div class="workshop-filters">
+        <div class="filter-container">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All Masterclasses</button>
+                <button class="filter-btn" data-filter="beginner">Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                <button class="filter-btn" data-filter="advanced">Advanced</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn" data-category="sewing">Sewing</button>
+                <button class="filter-btn" data-category="pattern">Pattern Making</button>
+                <button class="filter-btn" data-category="embroidery">Embroidery</button>
+                <button class="filter-btn" data-category="design">Design</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Workshops -->
+    <section class="workshop-grid">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">UPCOMING SESSIONS</div>
+                <h2 class="section-title-luxury">Reserve Your Place</h2>
+                <p class="section-subtitle">Intimate classes with limited availability</p>
+            </div>
+            
+            <div class="featured-grid" id="workshopsGrid">
+                <!-- Workshops will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Masterclass Series -->
+    <section class="masterclass-series">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">SIGNATURE SERIES</div>
+                <h2 class="section-title-luxury">The Mastery Program</h2>
+                <p class="section-subtitle">A comprehensive journey into the world of haute couture</p>
+            </div>
+            
+            <div class="series-grid">
+                <div class="series-card">
+                    <div class="series-number">I</div>
+                    <h3 class="series-title">The Foundations of Bespoke</h3>
+                    <p class="series-description">A 4-week intensive covering the essential techniques of custom tailoring. Perfect for those beginning their journey.</p>
+                    <div class="workshop-footer" style="margin-top: 1.5rem; border-top: none; padding-top: 0;">
+                        <span class="workshop-price">$1,200</span>
+                        <button class="btn-workshop" onclick="bookSeries(1)">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="series-card">
+                    <div class="series-number">II</div>
+                    <h3 class="series-title">Advanced Pattern Engineering</h3>
+                    <p class="series-description">Master the mathematics of fit. Learn to draft patterns that perfectly complement the human form.</p>
+                    <div class="workshop-footer" style="margin-top: 1.5rem; border-top: none; padding-top: 0;">
+                        <span class="workshop-price">$1,800</span>
+                        <button class="btn-workshop" onclick="bookSeries(2)">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="series-card">
+                    <div class="series-number">III</div>
+                    <h3 class="series-title">Haute Couture Techniques</h3>
+                    <p class="series-description">Explore the world of high fashion. Hand-sewing, embellishment, and the secrets of Parisian ateliers.</p>
+                    <div class="workshop-footer" style="margin-top: 1.5rem; border-top: none; padding-top: 0;">
+                        <span class="workshop-price">$2,500</span>
+                        <button class="btn-workshop" onclick="bookSeries(3)">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="series-card">
+                    <div class="series-number">IV</div>
+                    <h3 class="series-title">The Artisan's Portfolio</h3>
+                    <p class="series-description">Create your masterpiece. Guided mentorship to complete your first bespoke garment from concept to completion.</p>
+                    <div class="workshop-footer" style="margin-top: 1.5rem; border-top: none; padding-top: 0;">
+                        <span class="workshop-price">$3,200</span>
+                        <button class="btn-workshop" onclick="bookSeries(4)">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Mentorship -->
+    <section class="atelier">
+        <div class="container">
+            <div class="atelier-content">
+                <div class="section-label">EXCLUSIVE</div>
+                <h2 class="section-title-luxury">Private Mentorship</h2>
+                <p>Work one-on-one with our master artisans. Tailored curriculum designed around your goals and skill level. Limited availability.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="custom-order.html" class="btn-primary-luxury">Inquire About Mentorship →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Workshop Highlights -->
+    <section class="featured" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FROM THE ARCHIVE</div>
+                <h2 class="section-title-luxury">Past Masterclasses</h2>
+            </div>
+            
+            <div class="featured-grid" id="pastWorkshopsGrid">
+                <!-- Past workshops will be loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-luxury">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-icon">✦</div>
+                    <h3>123-WEARZ</h3>
+                    <p>Bespoke Tailoring House<br>Est. 2024</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Atelier</h4>
+                        <ul>
+                            <li><a href="index.html">Philosophy</a></li>
+                            <li><a href="#">Craftsmanship</a></li>
+                            <li><a href="#">Sustainability</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Learn</h4>
+                        <ul>
+                            <li><a href="workshops.html">Masterclasses</a></li>
+                            <li><a href="#">Private Mentorship</a></li>
+                            <li><a href="#">Resources</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Journal</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Visit</h4>
+                        <ul>
+                            <li><a href="#">Private Appointments</a></li>
+                            <li><a href="#">Atelier Location</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-newsletter">
+                    <p>Subscribe for workshop announcements and exclusive invitations</p>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 123-WEARZ. All rights reserved. Crafted with precision.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/luxury.js"></script>
+    <script>
+        // Workshop Data
+        const workshops = [
+            {
+                id: 1,
+                title: "Introduction to Bespoke Tailoring",
+                category: "sewing",
+                level: "beginner",
+                date: "March 15-17, 2024",
+                time: "10:00 AM - 4:00 PM",
+                duration: "3 Days",
+                price: 450,
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600",
+                description: "Learn the fundamentals of hand-sewing, fabric selection, and garment construction in this immersive 3-day workshop.",
+                spots: 8,
+                featured: true
+            },
+            {
+                id: 2,
+                title: "Pattern Making Mastery",
+                category: "pattern",
+                level: "intermediate",
+                date: "March 22-24, 2024",
+                time: "10:00 AM - 5:00 PM",
+                duration: "3 Days",
+                price: 650,
+                image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600",
+                description: "Draft and manipulate patterns with precision. Understand the mathematics of fit and proportion.",
+                spots: 6,
+                featured: true
+            },
+            {
+                id: 3,
+                title: "Artisanal Embroidery",
+                category: "embroidery",
+                level: "beginner",
+                date: "April 5-7, 2024",
+                time: "11:00 AM - 4:30 PM",
+                duration: "3 Days",
+                price: 550,
+                image: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600",
+                description: "Master traditional embroidery techniques including goldwork, silk shading, and bead embellishment.",
+                spots: 10,
+                featured: false
+            },
+            {
+                id: 4,
+                title: "Haute Couture Construction",
+                category: "sewing",
+                level: "advanced",
+                date: "April 12-16, 2024",
+                time: "9:30 AM - 5:30 PM",
+                duration: "5 Days",
+                price: 1200,
+                image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600",
+                description: "Advanced techniques in couture finishing, hand-stitching, and structural garment engineering.",
+                spots: 4,
+                featured: true
+            },
+            {
+                id: 5,
+                title: "Fashion Design Sketching",
+                category: "design",
+                level: "beginner",
+                date: "April 19-21, 2024",
+                time: "10:00 AM - 3:00 PM",
+                duration: "3 Days",
+                price: 380,
+                image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600",
+                description: "Develop your design voice through fashion illustration, mood boards, and concept development.",
+                spots: 12,
+                featured: false
+            },
+            {
+                id: 6,
+                title: "Luxury Outerwear",
+                category: "pattern",
+                level: "advanced",
+                date: "April 26-28, 2024",
+                time: "10:00 AM - 5:00 PM",
+                duration: "3 Days",
+                price: 850,
+                image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600",
+                description: "Create sophisticated coats and jackets with expert techniques in structure and finishing.",
+                spots: 6,
+                featured: false
+            }
+        ];
+        
+        const pastWorkshops = [
+            {
+                id: 101,
+                title: "The Art of Tailoring",
+                category: "sewing",
+                level: "intermediate",
+                date: "January 2024",
+                image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600",
+                description: "An intensive exploration of traditional tailoring techniques."
+            },
+            {
+                id: 102,
+                title: "Sustainable Fashion",
+                category: "design",
+                level: "all",
+                date: "December 2023",
+                image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600",
+                description: "Eco-conscious design and zero-waste pattern making."
+            },
+            {
+                id: 103,
+                title: "Evening Wear Essentials",
+                category: "embroidery",
+                level: "advanced",
+                date: "November 2023",
+                image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600",
+                description: "Creating show-stopping evening pieces with expert techniques."
+            }
+        ];
+        
+        let currentFilter = 'all';
+        let currentCategory = 'all';
+        
+        function renderWorkshops() {
+            const grid = document.getElementById('workshopsGrid');
+            if (!grid) return;
+            
+            let filtered = workshops;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(w => w.level === currentFilter);
+            }
+            
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(w => w.category === currentCategory);
+            }
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                        <p style="color: rgba(255,255,255,0.6);">No workshops found for the selected filters.</p>
+                        <button onclick="resetFilters()" class="btn-workshop" style="margin-top: 1rem;">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(workshop => `
+                <div class="workshop-card-luxury ${workshop.featured ? 'workshop-featured' : ''}" data-level="${workshop.level}" data-category="${workshop.category}">
+                    ${workshop.featured ? '<div class="workshop-badge">FEATURED</div>' : ''}
+                    <img src="${workshop.image}" alt="${workshop.title}" class="workshop-image">
+                    <div class="workshop-content">
+                        <div class="workshop-category">${workshop.category.toUpperCase()} • ${workshop.level.toUpperCase()}</div>
+                        <h3 class="workshop-title">${workshop.title}</h3>
+                        <div class="workshop-details">
+                            <span class="workshop-detail">📅 ${workshop.date}</span>
+                            <span class="workshop-detail">⏱️ ${workshop.duration}</span>
+                            <span class="workshop-detail">👥 ${workshop.spots} spots</span>
+                        </div>
+                        <p class="workshop-description">${workshop.description}</p>
+                        <div class="workshop-footer">
+                            <span class="workshop-price">$${workshop.price} <small>per person</small></span>
+                            <button class="btn-workshop" onclick="bookWorkshop(${workshop.id})">Reserve Seat</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderPastWorkshops() {
+            const grid = document.getElementById('pastWorkshopsGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = pastWorkshops.map(workshop => `
+                <div class="workshop-card-luxury">
+                    <img src="${workshop.image}" alt="${workshop.title}" class="workshop-image">
+                    <div class="workshop-content">
+                        <div class="upcoming-badge">${workshop.date}</div>
+                        <h3 class="workshop-title">${workshop.title}</h3>
+                        <p class="workshop-description">${workshop.description}</p>
+                        <div class="workshop-footer">
+                            <span class="workshop-price">View Gallery →</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function bookWorkshop(id) {
+            const workshop = workshops.find(w => w.id === id);
+            if (workshop) {
+                showNotification(`Reservation request sent for "${workshop.title}". Our team will contact you within 24 hours.`, 'success');
+                // Store booking in localStorage for demo
+                const bookings = JSON.parse(localStorage.getItem('workshopBookings')) || [];
+                bookings.push({ ...workshop, bookingDate: new Date().toISOString() });
+                localStorage.setItem('workshopBookings', JSON.stringify(bookings));
+            }
+        }
+        
+        function bookSeries(seriesId) {
+            const series = ['The Foundations of Bespoke', 'Advanced Pattern Engineering', 'Haute Couture Techniques', 'The Artisan\'s Portfolio'];
+            showNotification(`Series enrollment inquiry sent for "${series[seriesId-1]}". We'll be in touch shortly.`, 'success');
+        }
+        
+        function resetFilters() {
+            currentFilter = 'all';
+            currentCategory = 'all';
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-filter="all"]').classList.add('active');
+            renderWorkshops();
+        }
+        
+        // Event Listeners for filters
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWorkshops();
+            renderPastWorkshops();
+            
+            // Level filter buttons
+            document.querySelectorAll('[data-filter]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentFilter = btn.getAttribute('data-filter');
+                    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderWorkshops();
+                });
+            });
+            
+            // Category filter buttons
+            document.querySelectorAll('[data-category]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentCategory = btn.getAttribute('data-category');
+                    document.querySelectorAll('[data-category]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderWorkshops();
+                });
+            });
+        });
+        
+        // Add to cart function from main luxury.js if not present
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 1rem 2rem;
+                background: ${type === 'success' ? '#d4af37' : '#0a0a0a'};
+                color: ${type === 'success' ? '#0a0a0a' : '#ffffff'};
+                border: 1px solid rgba(212, 175, 55, 0.3);
+                z-index: 10000;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+                animation: slideIn 0.3s ease;
+                font-family: 'Inter', sans-serif;
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // Add style for slideIn if not exists
+        if (!document.querySelector('#notificationStyle')) {
+            const style = document.createElement('style');
+            style.id = 'notificationStyle';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>

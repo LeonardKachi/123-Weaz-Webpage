@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Collections | 123-WEARZ Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/luxury.css">
+    <style>
+        /* Collections Page Specific Styles */
+        .collection-hero {
+            height: 85vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+        
+        .collection-hero .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .collection-showcase {
+            padding: 6rem 0;
+            background: #0a0a0a;
+        }
+        
+        .collection-master {
+            margin-bottom: 8rem;
+        }
+        
+        .collection-master:last-child {
+            margin-bottom: 0;
+        }
+        
+        .collection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .collection-name {
+            font-size: 3rem;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: -0.02em;
+        }
+        
+        .collection-subtitle {
+            color: #d4af37;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+        
+        .collection-description {
+            max-width: 600px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        
+        .collection-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.7rem;
+            color: #d4af37;
+        }
+        
+        .view-all-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .lookbook {
+            background: linear-gradient(135deg, #050505 0%, #0f0f0f 100%);
+            padding: 6rem 0;
+        }
+        
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .lookbook-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+        
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .lookbook-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            text-align: center;
+        }
+        
+        .lookbook-caption h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .lookbook-caption p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .size-guide {
+            padding: 5rem 0;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .size-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .size-card h4 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .size-card p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1024px) {
+            .collection-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .lookbook-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .size-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .collection-name {
+                font-size: 2rem;
+            }
+            
+            .collection-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .size-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .btn-inquire {
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 0.75rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-inquire:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-premium">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-icon">✦</div>
+                <div class="logo-text">
+                    <span class="logo-main">123-WEARZ</span>
+                    <span class="logo-sub">BESPOKE TAILORING</span>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Atelier</a>
+                <a href="collections.html" class="nav-link active">Collections</a>
+                <a href="bespoke.html" class="nav-link">Bespoke</a>
+                <a href="workshops.html" class="nav-link">Masterclass</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" id="cartBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Collections Hero -->
+    <section class="collection-hero">
+        <div class="hero-content">
+            <div class="hero-badge">THE ARCHIVE</div>
+            <h1 class="hero-title">
+                <span class="title-line">The Collections</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Each collection tells a story. Explore our curated selections<br>
+                of timeless pieces, reimagined for the modern discerning individual.
+            </p>
+        </div>
+        <div class="hero-scroll">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- L'Homme Collection -->
+    <section class="collection-showcase">
+        <div class="container">
+            <div class="collection-master">
+                <div class="collection-header">
+                    <div>
+                        <div class="collection-subtitle">COLLECTION I</div>
+                        <h2 class="collection-name">L'Homme</h2>
+                    </div>
+                    <div class="collection-subtitle">MEN'S BESPOKE</div>
+                </div>
+                <div class="collection-description">
+                    Architectural precision meets masculine elegance. Each piece in the L'Homme collection is 
+                    meticulously crafted for the modern gentleman who appreciates the intersection of tradition 
+                    and innovation.
+                </div>
+                <div class="collection-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600" alt="Signature Blazer">
+                        <div class="gallery-overlay">
+                            <h4>The Signature Blazer</h4>
+                            <p>Hand-finished • 100% Wool</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600" alt="Artisan Overcoat">
+                        <div class="gallery-overlay">
+                            <h4>Artisan Overcoat</h4>
+                            <p>Cashmere Blend • Made to Measure</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" alt="Tailored Trousers">
+                        <div class="gallery-overlay">
+                            <h4>Tailored Trousers</h4>
+                            <p>Precision Fit • Italian Fabric</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-link">
+                    <a href="bespoke.html" class="btn-inquire">Inquire About L'Homme →</a>
+                </div>
+            </div>
+
+            <!-- La Femme Collection -->
+            <div class="collection-master">
+                <div class="collection-header">
+                    <div>
+                        <div class="collection-subtitle">COLLECTION II</div>
+                        <h2 class="collection-name">La Femme</h2>
+                    </div>
+                    <div class="collection-subtitle">WOMEN'S COUTURE</div>
+                </div>
+                <div class="collection-description">
+                    Sculptural silhouettes that celebrate the female form. La Femme combines classic couture 
+                    techniques with contemporary design, creating pieces that move with grace and confidence.
+                </div>
+                <div class="collection-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" alt="Sculptural Dress">
+                        <div class="gallery-overlay">
+                            <h4>Sculptural Dress</h4>
+                            <p>Silk Crepe • Hand-Draped</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" alt="Evening Gown">
+                        <div class="gallery-overlay">
+                            <h4>Evening Gown</h4>
+                            <p>French Lace • Couture Finish</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600" alt="Tailored Blazer">
+                        <div class="gallery-overlay">
+                            <h4>Power Blazer</h4>
+                            <p>Wool & Silk Blend</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-link">
+                    <a href="bespoke.html" class="btn-inquire">Inquire About La Femme →</a>
+                </div>
+            </div>
+
+            <!-- Essence Collection - Unisex -->
+            <div class="collection-master">
+                <div class="collection-header">
+                    <div>
+                        <div class="collection-subtitle">COLLECTION III</div>
+                        <h2 class="collection-name">Essence</h2>
+                    </div>
+                    <div class="collection-subtitle">BEYOND GENDER</div>
+                </div>
+                <div class="collection-description">
+                    Pure expression without boundaries. The Essence collection transcends traditional categorization, 
+                    focusing on form, movement, and the individual's unique relationship with their garment.
+                </div>
+                <div class="collection-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" alt="Fluid Jacket">
+                        <div class="gallery-overlay">
+                            <h4>Fluid Jacket</h4>
+                            <p>Unstructured • Sculptural Form</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600" alt="Wide Trousers">
+                        <div class="gallery-overlay">
+                            <h4>Wide Trousers</h4>
+                            <p>Japanese Denim • Relaxed Fit</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" alt="Layered Piece">
+                        <div class="gallery-overlay">
+                            <h4>Layered Piece</h4>
+                            <p>Versatile • Transformative</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-link">
+                    <a href="bespoke.html" class="btn-inquire">Inquire About Essence →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lookbook -->
+    <section class="lookbook">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">VISUAL NARRATIVE</div>
+                <h2 class="section-title-luxury">The Lookbook</h2>
+                <p class="section-subtitle">See our pieces in their natural element</p>
+            </div>
+            
+            <div class="lookbook-grid">
+                <div class="lookbook-item">
+                    <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800" alt="Lookbook 1">
+                    <div class="lookbook-caption">
+                        <h4>Autumn/Winter 2024</h4>
+                        <p>Architectural Forms</p>
+                    </div>
+                </div>
+                <div class="lookbook-item">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800" alt="Lookbook 2">
+                    <div class="lookbook-caption">
+                        <h4>Spring/Summer 2024</h4>
+                        <p>Fluid Movements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Size Guide -->
+    <section class="size-guide">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FIND YOUR FIT</div>
+                <h2 class="section-title-luxury">Size Guide</h2>
+                <p class="section-subtitle">Understanding your measurements</p>
+            </div>
+            
+            <div class="size-grid">
+                <div class="size-card">
+                    <h4>Bust/Chest</h4>
+                    <p>Measure around the fullest part of your chest, keeping the tape level</p>
+                </div>
+                <div class="size-card">
+                    <h4>Waist</h4>
+                    <p>Measure around your natural waistline, typically the narrowest point</p>
+                </div>
+                <div class="size-card">
+                    <h4>Hips</h4>
+                    <p>Measure around the fullest part of your hips, about 8 inches below waist</p>
+                </div>
+                <div class="size-card">
+                    <h4>Inseam</h4>
+                    <p>Measure from the inside of your leg, from crotch to ankle bone</p>
+                </div>
+            </div>
+            
+            <div class="view-all-link" style="margin-top: 3rem;">
+                <a href="bespoke.html" class="btn-inquire">Need Help with Sizing? →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-luxury">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-icon">✦</div>
+                    <h3>123-WEARZ</h3>
+                    <p>Bespoke Tailoring House<br>Est. 2024</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Collections</h4>
+                        <ul>
+                            <li><a href="#">L'Homme</a></li>
+                            <li><a href="#">La Femme</a></li>
+                            <li><a href="#">Essence</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="bespoke.html">Bespoke</a></li>
+                            <li><a href="#">Made-to-Measure</a></li>
+                            <li><a href="#">Alterations</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Journal</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-newsletter">
+                    <p>Subscribe for collection previews and exclusive invitations</p>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 123-WEARZ. All rights reserved. Crafted with precision.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/luxury.js"></script>
+</body>
+</html>

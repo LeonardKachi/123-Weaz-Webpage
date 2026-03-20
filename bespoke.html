@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Bespoke | 123-WEARZ Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/luxury.css">
+    <style>
+        /* Bespoke Page Specific Styles */
+        .bespoke-hero {
+            height: 70vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+        
+        .process-bespoke {
+            padding: 6rem 0;
+            background: #0a0a0a;
+        }
+        
+        .process-steps-bespoke {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .step-bespoke {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .step-bespoke:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-number-bespoke {
+            font-size: 0.8rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        /* Advanced Simple Form - Luxury Style */
+        .bespoke-form-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #050505 0%, #0f0f0f 100%);
+        }
+        
+        .form-container-luxury {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+        }
+        
+        .form-step {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-step:last-child {
+            border-bottom: none;
+        }
+        
+        .form-step-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+            font-weight: 400;
+        }
+        
+        .form-row-luxury {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group-luxury {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group-luxury label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+        }
+        
+        .form-group-luxury input,
+        .form-group-luxury select,
+        .form-group-luxury textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group-luxury input:focus,
+        .form-group-luxury select:focus,
+        .form-group-luxury textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-group-luxury select option {
+            background: #0a0a0a;
+        }
+        
+        .radio-group-luxury {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .radio-group-luxury label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .radio-group-luxury input[type="radio"] {
+            width: auto;
+            accent-color: #d4af37;
+        }
+        
+        .checkbox-group-luxury {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .checkbox-group-luxury label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .checkbox-group-luxury input[type="checkbox"] {
+            width: auto;
+            accent-color: #d4af37;
+        }
+        
+        .measurement-guide {
+            background: rgba(212, 175, 55, 0.05);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 2px solid #d4af37;
+        }
+        
+        .measurement-guide p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+        
+        .measurement-guide a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        
+        .btn-submit-luxury {
+            width: 100%;
+            padding: 1rem;
+            background: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn-submit-luxury:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        .form-message-luxury {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-message-luxury.success {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+        }
+        
+        .form-message-luxury.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row-luxury {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .process-steps-bespoke {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .form-container-luxury {
+                padding: 1.5rem;
+            }
+            
+            .radio-group-luxury {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        .faq-section {
+            padding: 5rem 0;
+            background: #0a0a0a;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-question {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #d4af37;
+        }
+        
+        .faq-answer {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-premium">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-icon">✦</div>
+                <div class="logo-text">
+                    <span class="logo-main">123-WEARZ</span>
+                    <span class="logo-sub">BESPOKE TAILORING</span>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Atelier</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="bespoke.html" class="nav-link active">Bespoke</a>
+                <a href="workshops.html" class="nav-link">Masterclass</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" id="cartBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bespoke Hero -->
+    <section class="bespoke-hero">
+        <div class="hero-content">
+            <div class="hero-badge">TAILORED FOR YOU</div>
+            <h1 class="hero-title">
+                <span class="title-line">The Bespoke</span>
+                <span class="title-line">Experience</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                A garment created exclusively for you. From initial consultation to final reveal,<br>
+                experience the pinnacle of personalized craftsmanship.
+            </p>
+        </div>
+        <div class="hero-scroll">
+            <span>Begin Your Journey</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Process Overview -->
+    <section class="process-bespoke">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">THE JOURNEY</div>
+                <h2 class="section-title-luxury">From Vision to Reality</h2>
+                <p class="section-subtitle">Your garment, your story, our expertise</p>
+            </div>
+            
+            <div class="process-steps-bespoke">
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 01</div>
+                    <h3>Consultation</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Share your vision, lifestyle needs, and preferences</p>
+                </div>
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 02</div>
+                    <h3>Design & Materials</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Select from premium fabrics and design details</p>
+                </div>
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 03</div>
+                    <h3>Precision Measurement</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">30+ measurements for perfect fit</p>
+                </div>
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 04</div>
+                    <h3>First Fitting</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Your garment begins to take form</p>
+                </div>
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 05</div>
+                    <h3>Refinement</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Meticulous adjustments for perfection</p>
+                </div>
+                <div class="step-bespoke">
+                    <div class="step-icon">✧</div>
+                    <div class="step-number-bespoke">STEP 06</div>
+                    <h3>Reveal</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Your masterpiece, delivered with ceremony</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bespoke Inquiry Form - Advanced but Simple -->
+    <section class="bespoke-form-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">BEGIN YOUR JOURNEY</div>
+                <h2 class="section-title-luxury">Inquire About Bespoke</h2>
+                <p class="section-subtitle">Tell us about your vision, and we'll guide you through the process</p>
+            </div>
+            
+            <div class="form-container-luxury">
+                <form id="bespokeForm">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step">
+                        <div class="form-step-title">01. Your Information</div>
+                        <div class="form-row-luxury">
+                            <div class="form-group-luxury">
+                                <label>Full Name *</label>
+                                <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group-luxury">
+                                <label>Email Address *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row-luxury">
+                            <div class="form-group-luxury">
+                                <label>Phone Number</label>
+                                <input type="tel" id="phone">
+                            </div>
+                            <div class="form-group-luxury">
+                                <label>City / Location</label>
+                                <input type="text" id="location">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: What You Want -->
+                    <div class="form-step">
+                        <div class="form-step-title">02. Your Vision</div>
+                        <div class="form-group-luxury">
+                            <label>What would you like to create? *</label>
+                            <select id="garmentType" required>
+                                <option value="">Select one</option>
+                                <option value="suit">Suit / Blazer Set</option>
+                                <option value="jacket">Jacket / Coat</option>
+                                <option value="dress">Dress / Gown</option>
+                                <option value="shirt">Shirt / Blouse</option>
+                                <option value="pants">Pants / Trousers</option>
+                                <option value="full-outfit">Full Outfit</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </div>
+                        <div class="form-group-luxury">
+                            <label>Tell us about your vision *</label>
+                            <textarea id="vision" rows="4" placeholder="Describe what you're imagining... (e.g., style, occasion, feeling, colors, inspirations)" required></textarea>
+                        </div>
+                        <div class="form-group-luxury">
+                            <label>What's the occasion?</label>
+                            <select id="occasion">
+                                <option value="">Select one</option>
+                                <option value="wedding">Wedding / Special Event</option>
+                                <option value="business">Business / Professional</option>
+                                <option value="casual">Everyday / Casual</option>
+                                <option value="evening">Evening / Formal</option>
+                                <option value="other">Not sure / Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Style Preferences (Simple Language) -->
+                    <div class="form-step">
+                        <div class="form-step-title">03. Your Style</div>
+                        <div class="form-group-luxury">
+                            <label>How would you describe your style?</label>
+                            <div class="radio-group-luxury">
+                                <label><input type="radio" name="style" value="classic"> Classic & Timeless</label>
+                                <label><input type="radio" name="style" value="modern"> Modern & Minimal</label>
+                                <label><input type="radio" name="style" value="bold"> Bold & Statement</label>
+                                <label><input type="radio" name="style" value="relaxed"> Relaxed & Comfortable</label>
+                                <label><input type="radio" name="style" value="not-sure"> Not sure / Open to ideas</label>
+                            </div>
+                        </div>
+                        <div class="form-group-luxury">
+                            <label>What colors do you prefer?</label>
+                            <div class="checkbox-group-luxury">
+                                <label><input type="checkbox" value="black"> Black</label>
+                                <label><input type="checkbox" value="navy"> Navy</label>
+                                <label><input type="checkbox" value="charcoal"> Charcoal</label>
+                                <label><input type="checkbox" value="beige"> Beige / Neutral</label>
+                                <label><input type="checkbox" value="earth"> Earth Tones</label>
+                                <label><input type="checkbox" value="jewel"> Jewel Tones</label>
+                                <label><input type="checkbox" value="pastel"> Pastels</label>
+                                <label><input type="checkbox" value="bright"> Bright Colors</label>
+                                <label><input type="checkbox" value="open"> Open to suggestions</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Fit & Comfort (Simple Language) -->
+                    <div class="form-step">
+                        <div class="form-step-title">04. Fit & Comfort</div>
+                        <div class="form-group-luxury">
+                            <label>How do you prefer your clothes to fit?</label>
+                            <div class="radio-group-luxury">
+                                <label><input type="radio" name="fit" value="slim"> Fitted / Slim</label>
+                                <label><input type="radio" name="fit" value="tailored"> Tailored / Classic</label>
+                                <label><input type="radio" name="fit" value="relaxed"> Relaxed / Loose</label>
+                                <label><input type="radio" name="fit" value="not-sure"> Not sure</label>
+                            </div>
+                        </div>
+                        <div class="form-row-luxury">
+                            <div class="form-group-luxury">
+                                <label>Height (cm or ft/in)</label>
+                                <input type="text" id="height" placeholder="e.g., 175cm or 5'9\"">
+                                <div class="measurement-guide">
+                                    <p>💡 Not sure about measurements? Don't worry! We'll guide you through the process during your consultation.</p>
+                                    <a href="#">How to measure yourself →</a>
+                                </div>
+                            </div>
+                            <div class="form-group-luxury">
+                                <label>Any fit preferences or considerations?</label>
+                                <textarea id="fitNotes" rows="3" placeholder="e.g., broader shoulders, longer sleeves, comfortable around waist, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Budget & Timeline -->
+                    <div class="form-step">
+                        <div class="form-step-title">05. Budget & Timeline</div>
+                        <div class="form-row-luxury">
+                            <div class="form-group-luxury">
+                                <label>What's your budget range?</label>
+                                <select id="budget">
+                                    <option value="">Select one</option>
+                                    <option value="500-1000">$500 - $1,000</option>
+                                    <option value="1000-2000">$1,000 - $2,000</option>
+                                    <option value="2000-3000">$2,000 - $3,000</option>
+                                    <option value="3000-5000">$3,000 - $5,000</option>
+                                    <option value="5000+">$5,000+</option>
+                                    <option value="flexible">Flexible / Open to discussion</option>
+                                </select>
+                            </div>
+                            <div class="form-group-luxury">
+                                <label>When do you need it by?</label>
+                                <select id="timeline">
+                                    <option value="">Select one</option>
+                                    <option value="asap">As soon as possible</option>
+                                    <option value="1month">Within 1 month</option>
+                                    <option value="2months">Within 2 months</option>
+                                    <option value="3months">Within 3 months</option>
+                                    <option value="flexible">Flexible / No rush</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6: How You Want to Proceed -->
+                    <div class="form-step">
+                        <div class="form-step-title">06. Next Steps</div>
+                        <div class="form-group-luxury">
+                            <label>How would you like to begin?</label>
+                            <div class="radio-group-luxury">
+                                <label><input type="radio" name="nextStep" value="consultation" checked> Schedule a consultation call</label>
+                                <label><input type="radio" name="nextStep" value="atelier"> Visit the atelier in person</label>
+                                <label><input type="radio" name="nextStep" value="email"> Start with email discussion</label>
+                            </div>
+                        </div>
+                        <div class="form-group-luxury">
+                            <label>Any questions or additional notes?</label>
+                            <textarea id="notes" rows="3" placeholder="Anything else you'd like us to know..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit-luxury">Submit Inquiry →</button>
+                    <div id="formMessage" class="form-message-luxury"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Frequently Asked Questions (Simple Answers) -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">COMMON QUESTIONS</div>
+                <h2 class="section-title-luxury">Everything You Need to Know</h2>
+                <p class="section-subtitle">Simple answers to common questions about bespoke tailoring</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">What is bespoke tailoring?</div>
+                    <div class="faq-answer">Bespoke means a garment made entirely for you, from scratch. Unlike buying off the rack, we create a unique pattern based on your measurements and preferences. It's like having a piece of art made just for your body.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does it take?</div>
+                    <div class="faq-answer">Typically 6-8 weeks from consultation to completion. This includes multiple fittings to ensure perfection. Rush orders may be available depending on complexity.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to know my measurements?</div>
+                    <div class="faq-answer">Not at all! We'll guide you through the measurement process. You can visit our atelier for precise measurements, or we'll send you a simple guide if you're remote.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if I don't know what I want?</div>
+                    <div class="faq-answer">That's perfectly fine! Our consultation is designed to understand your lifestyle, preferences, and needs. We'll guide you through options and help you discover what works best for you.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How much does bespoke cost?</div>
+                    <div class="faq-answer">Pricing varies based on garment type, fabric selection, and complexity. Our pieces typically range from $1,000 to $5,000+. We'll work within your budget to create something exceptional.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I see fabric samples?</div>
+                    <div class="faq-answer">Absolutely! We have an extensive library of premium fabrics from the world's finest mills. You can view samples during your consultation or we can send a curated selection based on your preferences.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer-luxury">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-icon">✦</div>
+                    <h3>123-WEARZ</h3>
+                    <p>Bespoke Tailoring House<br>Est. 2024</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Collections</h4>
+                        <ul>
+                            <li><a href="collections.html">L'Homme</a></li>
+                            <li><a href="collections.html">La Femme</a></li>
+                            <li><a href="collections.html">Essence</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="bespoke.html">Bespoke</a></li>
+                            <li><a href="#">Made-to-Measure</a></li>
+                            <li><a href="#">Alterations</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Journal</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-newsletter">
+                    <p>Subscribe for exclusive previews and invitations</p>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 123-WEARZ. All rights reserved. Crafted with precision.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/luxury.js"></script>
+    <script>
+        // Bespoke Form Handler
+        const bespokeForm = document.getElementById('bespokeForm');
+        if (bespokeForm) {
+            bespokeForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Collect form data
+                const formData = {
+                    fullName: document.getElementById('fullName')?.value,
+                    email: document.getElementById('email')?.value,
+                    phone: document.getElementById('phone')?.value,
+                    location: document.getElementById('location')?.value,
+                    garmentType: document.getElementById('garmentType')?.value,
+                    vision: document.getElementById('vision')?.value,
+                    occasion: document.getElementById('occasion')?.value,
+                    style: document.querySelector('input[name="style"]:checked')?.value,
+                    colors: Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value),
+                    fit: document.querySelector('input[name="fit"]:checked')?.value,
+                    height: document.getElementById('height')?.value,
+                    fitNotes: document.getElementById('fitNotes')?.value,
+                    budget: document.getElementById('budget')?.value,
+                    timeline: document.getElementById('timeline')?.value,
+                    nextStep: document.querySelector('input[name="nextStep"]:checked')?.value,
+                    notes: document.getElementById('notes')?.value,
+                    date: new Date().toISOString()
+                };
+                
+                // Validate required fields
+                if (!formData.fullName || !formData.email || !formData.garmentType || !formData.vision) {
+                    showFormMessage('Please fill in all required fields (*)', 'error');
+                    return;
+                }
+                
+                // Store in localStorage for demo
+                const inquiries = JSON.parse(localStorage.getItem('bespokeInquiries')) || [];
+                inquiries.push(formData);
+                localStorage.setItem('bespokeInquiries', JSON.stringify(inquiries));
+                
+                // Show success message
+                showFormMessage('Thank you! Our team will contact you within 24 hours to begin your bespoke journey.', 'success');
+                
+                // Reset form
+                bespokeForm.reset();
+                
+                // Scroll to message
+                document.getElementById('formMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        }
+        
+        function showFormMessage(message, type) {
+            const messageDiv = document.getElementById('formMessage');
+            if (messageDiv) {
+                messageDiv.textContent = message;
+                messageDiv.className = `form-message-luxury ${type}`;
+                messageDiv.style.display = 'block';
+                
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

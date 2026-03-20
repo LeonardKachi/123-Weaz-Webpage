@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Order - 123-Wearz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">123-WEARZ</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="custom-order.html" class="active">Custom Order</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#" class="cart-icon">🛒<span class="cart-count">0</span></a>
+                <a href="#" class="menu-toggle">☰</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Custom Order</h1>
+            <p>Tell us about your dream garment</p>
+        </div>
+    </div>
+
+    <div class="custom-order-container">
+        <div class="container">
+            <div class="custom-order-form">
+                <form id="customOrderForm">
+                    <div class="form-group">
+                        <label for="garmentType">Garment Type *</label>
+                        <select id="garmentType" required>
+                            <option value="">Select garment type</option>
+                            <option value="dress">Dress</option>
+                            <option value="shirt">Shirt</option>
+                            <option value="pants">Pants</option>
+                            <option value="jacket">Jacket</option>
+                            <option value="skirt">Skirt</option>
+                            <option value="suit">Suit</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender *</label>
+                            <select id="gender" required>
+                                <option value="">Select gender</option>
+                                <option value="men">Men</option>
+                                <option value="women">Women</option>
+                                <option value="unisex">Unisex</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fabric">Fabric Preference</label>
+                            <input type="text" id="fabric" placeholder="e.g., Cotton, Silk, Linen">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="color">Color Preference</label>
+                            <input type="text" id="color" placeholder="e.g., Navy Blue, Pastel Pink">
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget ($)</label>
+                            <input type="number" id="budget" placeholder="Your estimated budget">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bust">Bust/Chest (inches)</label>
+                            <input type="number" step="0.5" id="bust" placeholder="inches">
+                        </div>
+                        <div class="form-group">
+                            <label for="waist">Waist (inches)</label>
+                            <input type="number" step="0.5" id="waist" placeholder="inches">
+                        </div>
+                        <div class="form-group">
+                            <label for="hips">Hips (inches)</label>
+                            <input type="number" step="0.5" id="hips" placeholder="inches">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Design Description *</label>
+                        <textarea id="description" rows="6" placeholder="Describe your dream garment in detail... Include style references, special features, etc." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inspiration">Inspiration Images (URLs)</label>
+                        <input type="text" id="inspiration" placeholder="Paste image URLs separated by commas">
+                        <small>Paste image URLs from Pinterest, Instagram, etc.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Desired Timeline</label>
+                        <select id="timeline">
+                            <option value="2-3 weeks">2-3 weeks</option>
+                            <option value="1 month">1 month</option>
+                            <option value="2 months">2 months</option>
+                            <option value="3+ months">3+ months</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">Submit Custom Order</button>
+                </form>
+                <div id="formMessage" class="form-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>123-WEARZ</h3>
+                    <p>Premium clothing for the modern individual</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="custom-order.html">Custom Order</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: info@123-wearz.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 123-WEARZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

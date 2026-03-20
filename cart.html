@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Shopping Cart | 123-WEARZ Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/luxury.css">
+    <style>
+        /* Cart Page Specific Styles */
+        .cart-hero {
+            height: 40vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .cart-container {
+            padding: 5rem 0;
+            background: #0a0a0a;
+            min-height: 60vh;
+        }
+        
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 3rem;
+        }
+        
+        /* Cart Items */
+        .cart-items {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .cart-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 0.5fr;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 0.5fr;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .cart-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .cart-product {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .cart-product-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .cart-product-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        
+        .cart-product-info p {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-product-size {
+            font-size: 0.7rem;
+            color: #d4af37;
+            display: inline-block;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.2rem 0.5rem;
+        }
+        
+        .cart-price {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .quantity-btn:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+            border-color: #d4af37;
+        }
+        
+        .quantity-value {
+            font-size: 0.9rem;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cart-total {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #d4af37;
+        }
+        
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .remove-btn:hover {
+            color: #ff4444;
+        }
+        
+        /* Cart Summary */
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .summary-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .summary-row.total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #d4af37;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .checkout-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .continue-shopping:hover {
+            color: #d4af37;
+        }
+        
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .empty-cart-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-cart h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .empty-cart p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+        
+        .shop-now-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .shop-now-btn:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+        
+        /* Shipping Options */
+        .shipping-options {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .shipping-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .shipping-option input {
+            accent-color: #d4af37;
+        }
+        
+        .shipping-option label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+        
+        /* Promo Code */
+        .promo-code {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .promo-code input {
+            flex: 1;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .promo-code input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        
+        .apply-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .apply-btn:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+        
+        /* Recommendations */
+        .recommendations {
+            padding: 5rem 0;
+            background: #050505;
+        }
+        
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .rec-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .rec-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .rec-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .rec-info {
+            padding: 1rem;
+        }
+        
+        .rec-name {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rec-price {
+            font-size: 0.8rem;
+            color: #d4af37;
+        }
+        
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .cart-summary {
+                position: static;
+            }
+            
+            .recommendation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cart-header {
+                display: none;
+            }
+            
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .cart-product {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cart-quantity {
+                justify-content: center;
+            }
+            
+            .cart-price, .cart-total {
+                text-align: center;
+            }
+            
+            .recommendation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-premium">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-icon">✦</div>
+                <div class="logo-text">
+                    <span class="logo-main">123-WEARZ</span>
+                    <span class="logo-sub">BESPOKE TAILORING</span>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Atelier</a>
+                <a href="collections.html" class="nav-link">Collections</a>
+                <a href="bespoke.html" class="nav-link">Bespoke</a>
+                <a href="workshops.html" class="nav-link">Masterclass</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" id="cartBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Hero -->
+    <section class="cart-hero">
+        <div class="hero-content">
+            <div class="hero-badge">YOUR SELECTION</div>
+            <h1 class="hero-title">
+                <span class="title-line">Shopping Cart</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Review your selections before proceeding to checkout
+            </p>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="cart-container">
+        <div class="container">
+            <div id="cartContent">
+                <!-- Cart will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="recommendations" id="recommendations" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">YOU MAY ALSO LIKE</div>
+                <h2 class="section-title-luxury">Complete Your Look</h2>
+            </div>
+            <div class="recommendation-grid" id="recommendationGrid">
+                <!-- Recommendations will be loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-luxury">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-icon">✦</div>
+                    <h3>123-WEARZ</h3>
+                    <p>Bespoke Tailoring House<br>Est. 2024</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Collections</h4>
+                        <ul>
+                            <li><a href="collections.html">L'Homme</a></li>
+                            <li><a href="collections.html">La Femme</a></li>
+                            <li><a href="collections.html">Essence</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="bespoke.html">Bespoke</a></li>
+                            <li><a href="#">Made-to-Measure</a></li>
+                            <li><a href="#">Alterations</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Journal</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-newsletter">
+                    <p>Subscribe for exclusive previews and invitations</p>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 123-WEARZ. All rights reserved. Crafted with precision.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/luxury.js"></script>
+    <script>
+        // Cart Management
+        let cart = JSON.parse(localStorage.getItem('luxuryCart')) || [];
+        
+        // Sample Products for Recommendations
+        const sampleProducts = [
+            { id: 101, name: "The Signature Blazer", price: 1890, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400", category: "men" },
+            { id: 102, name: "Sculptural Dress", price: 2450, image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400", category: "women" },
+            { id: 103, name: "Artisan Overcoat", price: 3290, image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400", category: "men" },
+            { id: 104, name: "Silk Blouse", price: 790, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400", category: "women" }
+        ];
+        
+        // Shipping Options
+        let selectedShipping = {
+            method: 'standard',
+            cost: 0
+        };
+        
+        let promoCode = '';
+        let discount = 0;
+        
+        function renderCart() {
+            const cartContent = document.getElementById('cartContent');
+            const recommendations = document.getElementById('recommendations');
+            
+            if (!cartContent) return;
+            
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Discover our collections and find something exceptional.</p>
+                        <a href="collections.html" class="shop-now-btn">Explore Collections</a>
+                    </div>
+                `;
+                if (recommendations) recommendations.style.display = 'block';
+                updateCartCount();
+                return;
+            }
+            
+            recommendations.style.display = 'block';
+            
+            // Calculate subtotal
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = selectedShipping.cost;
+            const total = subtotal + shipping - discount;
+            
+            cartContent.innerHTML = `
+                <div class="cart-layout">
+                    <!-- Cart Items -->
+                    <div class="cart-items">
+                        <div class="cart-header">
+                            <span>Product</span>
+                            <span>Price</span>
+                            <span>Quantity</span>
+                            <span>Total</span>
+                        </div>
+                        ${cart.map(item => `
+                            <div class="cart-item" data-id="${item.id}">
+                                <div class="cart-product">
+                                    <img src="${item.image}" alt="${item.name}" class="cart-product-image">
+                                    <div class="cart-product-info">
+                                        <h4>${item.name}</h4>
+                                        <p>${item.category === 'men' ? "Men's Collection" : item.category === 'women' ? "Women's Collection" : "Unisex Collection"}</p>
+                                        ${item.size ? `<span class="cart-product-size">Size: ${item.size}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="cart-price">$${item.price.toLocaleString()}</div>
+                                <div class="cart-quantity">
+                                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">−</button>
+                                    <span class="quantity-value">${item.quantity}</span>
+                                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                </div>
+                                <div class="cart-total">$${(item.price * item.quantity).toLocaleString()}</div>
+                                <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Cart Summary -->
+                    <div class="cart-summary">
+                        <div class="summary-title">Order Summary</div>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$${subtotal.toLocaleString()}</span>
+                        </div>
+                        
+                        <div class="shipping-options">
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" id="standard" value="standard" ${selectedShipping.method === 'standard' ? 'checked' : ''} onchange="updateShipping('standard', 0)">
+                                <label for="standard">Standard Shipping (5-7 business days) - Free</label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" id="express" value="express" ${selectedShipping.method === 'express' ? 'checked' : ''} onchange="updateShipping('express', 50)">
+                                <label for="express">Express Shipping (2-3 business days) - $50</label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" id="overnight" value="overnight" ${selectedShipping.method === 'overnight' ? 'checked' : ''} onchange="updateShipping('overnight', 150)">
+                                <label for="overnight">Overnight Shipping (Next day) - $150</label>
+                            </div>
+                        </div>
+                        
+                        <div class="promo-code">
+                            <input type="text" id="promoInput" placeholder="Promo code" value="${promoCode}">
+                            <button class="apply-btn" onclick="applyPromoCode()">Apply</button>
+                        </div>
+                        
+                        ${discount > 0 ? `
+                            <div class="summary-row">
+                                <span>Discount</span>
+                                <span style="color: #d4af37;">-$${discount.toLocaleString()}</span>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>$${total.toLocaleString()}</span>
+                        </div>
+                        
+                        <button class="checkout-btn" onclick="proceedToCheckout()">
+                            Proceed to Checkout
+                        </button>
+                        <a href="collections.html" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                </div>
+            `;
+            
+            updateCartCount();
+        }
+        
+        function updateQuantity(productId, newQuantity) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                if (newQuantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = newQuantity;
+                    localStorage.setItem('luxuryCart', JSON.stringify(cart));
+                    renderCart();
+                    showNotification('Cart updated', 'success');
+                }
+            }
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            localStorage.setItem('luxuryCart', JSON.stringify(cart));
+            renderCart();
+            showNotification('Item removed from cart', 'success');
+        }
+        
+        function updateShipping(method, cost) {
+            selectedShipping = { method, cost };
+            renderCart();
+            showNotification('Shipping method updated', 'success');
+        }
+        
+        function applyPromoCode() {
+            const input = document.getElementById('promoInput');
+            const code = input.value.toUpperCase();
+            
+            // Sample promo codes
+            const promos = {
+                'WELCOME10': { discount: 10, type: 'percent' },
+                'WELCOME50': { discount: 50, type: 'fixed' },
+                'LUXURY2024': { discount: 15, type: 'percent' }
+            };
+            
+            if (promos[code]) {
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                if (promos[code].type === 'percent') {
+                    discount = subtotal * (promos[code].discount / 100);
+                } else {
+                    discount = promos[code].discount;
+                }
+                
+                promoCode = code;
+                showNotification(`Promo code applied! You saved $${discount.toLocaleString()}`, 'success');
+                renderCart();
+            } else {
+                showNotification('Invalid promo code', 'error');
+            }
+        }
+        
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty', 'error');
+                return;
+            }
+            
+            // Store checkout data
+            const checkoutData = {
+                items: cart,
+                shipping: selectedShipping,
+                discount: discount,
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + selectedShipping.cost - discount,
+                date: new Date().toISOString()
+            };
+            
+            localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+            
+            // Redirect to checkout page (you can create this page or show modal)
+            showNotification('Proceeding to checkout...', 'success');
+            
+            // For demo, show checkout summary
+            setTimeout(() => {
+                const total = checkoutData.total;
+                const itemsCount = cart.length;
+                alert(`Order Summary\n\nItems: ${itemsCount}\nTotal: $${total.toLocaleString()}\n\nThank you for your interest! Our team will contact you to complete your order.`);
+                
+                // Optional: Clear cart after "checkout"
+                // cart = [];
+                // localStorage.setItem('luxuryCart', JSON.stringify(cart));
+                // renderCart();
+            }, 500);
+        }
+        
+        function loadRecommendations() {
+            const grid = document.getElementById('recommendationGrid');
+            if (!grid) return;
+            
+            // Get categories from cart to show relevant recommendations
+            const cartCategories = cart.map(item => item.category);
+            let recommendations = sampleProducts;
+            
+            // Filter out items already in cart
+            const cartIds = cart.map(item => item.id);
+            recommendations = recommendations.filter(p => !cartIds.includes(p.id));
+            
+            // Show first 4 recommendations
+            recommendations = recommendations.slice(0, 4);
+            
+            if (recommendations.length === 0) {
+                recommendations = sampleProducts.slice(0, 4);
+            }
+            
+            grid.innerHTML = recommendations.map(product => `
+                <div class="rec-card" onclick="addToCartFromRecommendation(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    <img src="${product.image}" alt="${product.name}" class="rec-image">
+                    <div class="rec-info">
+                        <div class="rec-name">${product.name}</div>
+                        <div class="rec-price">$${product.price.toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function addToCartFromRecommendation(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            localStorage.setItem('luxuryCart', JSON.stringify(cart));
+            renderCart();
+            loadRecommendations();
+            showNotification(`${product.name} added to cart`, 'success');
+        }
+        
+        function updateCartCount() {
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElements.forEach(el => {
+                if (el) el.textContent = totalItems;
+            });
+        }
+        
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 1rem 2rem;
+                background: ${type === 'success' ? '#d4af37' : '#ff4444'};
+                color: ${type === 'success' ? '#0a0a0a' : '#ffffff'};
+                border: 1px solid rgba(212, 175, 55, 0.3);
+                z-index: 10000;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+                animation: slideIn 0.3s ease;
+                font-family: 'Inter', sans-serif;
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            loadRecommendations();
+            updateCartCount();
+        });
+        
+        // Add style for slideIn if not exists
+        if (!document.querySelector('#notificationStyle')) {
+            const style = document.createElement('style');
+            style.id = 'notificationStyle';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>
